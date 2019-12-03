@@ -1,0 +1,82 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <cmail-header></cmail-header>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <div class="mdl-grid">
+        <form [formGroup]="formCadastro" (ngSubmit)="handleCadastrarUsuario()">
+
+          <cmail-form-group [campo]="formCadastro.get('nome')">
+            <input formControlName="nome" autofocus required type="text" name="nome" cmailFormField>
+            <!-- se tiver erros, então... -->
+            <div *ngIf="formCadastro.get('nome').errors">
+              <!-- errors.required -->
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('nome').errors.required">
+                Informar um nome é obrigatório
+              </span>
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('nome').errors.minlength">
+                Você preencheu {{ formCadastro.get('nome').errors.minlength.actualLength }} caracteres
+                de {{ formCadastro.get('nome').errors.minlength.requiredLength }}
+              </span>
+            </div>
+          </cmail-form-group>
+
+          <cmail-form-group [campo]="formCadastro.get('username')">
+            <input formControlName="username" autofocus required type="text" name="username" cmailFormField>
+            <div *ngIf="formCadastro.get('username').errors">
+              <!-- errors.required -->
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('username').errors.required">
+                Informar um nome é obrigatório
+              </span>
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('username').errors.email">
+                Digite um e-mail válido
+              </span>
+            </div>
+            <!-- <span class="mdl-textfield__error">Informar um nome de usuário é obrigatório!</span> -->
+          </cmail-form-group>
+
+          <cmail-form-group [campo]="formCadastro.get('senha')">
+            <input formControlName="senha" autofocus required type="password" name="senha" cmailFormField>
+            <div *ngIf="formCadastro.get('senha').errors">
+              <!-- errors.required -->
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('senha').errors.required">
+                Informar uma senha é obrigatório
+              </span>
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('senha').errors.minlength">
+                Você preencheu {{ formCadastro.get('senha').errors.minlength.actualLength }} caracteres
+                de {{ formCadastro.get('senha').errors.minlength.requiredLength }}
+              </span>
+            </div>
+          </cmail-form-group>
+
+          <!-- Novo campo telefone -->
+          <cmail-form-group [campo]="formCadastro.get('telefone')">
+            <input formControlName="telefone" required type="password" name="telefone" cmailFormField>
+            <div *ngIf="formCadastro.get('telefone').errors">
+              <!-- errors.required -->
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('telefone').errors.required">
+                Informar um telefone é obrigatório
+              </span>
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('telefone').errors.pattern">
+                O telefone deve conter 8 ou 9 números
+              </span>
+            </div>
+          </cmail-form-group>
+
+          <cmail-form-group [campo]="formCadastro.get('avatar')">
+            <input formControlName="avatar" type="text" name="avatar" cmailFormField>
+          </cmail-form-group>
+
+          <div class="mdl-card__actions">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+              Cadastrar
+            </button>
+            <button (click)="eraseForm()" class="mdl-button mdl-js-button mdl-button--flat">
+              Limpar
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
