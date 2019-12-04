@@ -13,6 +13,7 @@ import { CadastroComponent } from './modules/cadastro/cadastro.component';
 import { ModuloRoteamento } from './app.routes';
 import { CmailFormGroupComponent } from './components/cmail-form-group/cmail-form-group.component';
 import { cmailFormFieldDirective } from './components/cmail-form-group/cmail-form-field.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { cmailFormFieldDirective } from './components/cmail-form-group/cmail-for
     BrowserModule,
     FormsModule,
     ModuloRoteamento,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

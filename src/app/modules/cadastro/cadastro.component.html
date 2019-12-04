@@ -5,65 +5,76 @@
       <div class="mdl-grid">
         <form [formGroup]="formCadastro" (ngSubmit)="handleCadastrarUsuario()">
 
-          <cmail-form-group [campo]="formCadastro.get('nome')">
+          <cmail-form-group [campo]="nomeUsr">
             <input formControlName="nome" autofocus required type="text" name="nome" cmailFormField>
             <!-- se tiver erros, então... -->
-            <div *ngIf="formCadastro.get('nome').errors">
+            <div *ngIf="nomeUsr.errors">
               <!-- errors.required -->
-              <span class="mdl-textfield__error" *ngIf="formCadastro.get('nome').errors.required">
+              <span class="mdl-textfield__error" *ngIf="nomeUsr.errors.required">
                 Informar um nome é obrigatório
               </span>
-              <span class="mdl-textfield__error" *ngIf="formCadastro.get('nome').errors.minlength">
-                Você preencheu {{ formCadastro.get('nome').errors.minlength.actualLength }} caracteres
-                de {{ formCadastro.get('nome').errors.minlength.requiredLength }}
+              <span class="mdl-textfield__error" *ngIf="nomeUsr.errors.minlength">
+                Você preencheu {{ nomeUsr.errors.minlength.actualLength }} caracteres
+                de {{ nomeUsr.errors.minlength.requiredLength }}
               </span>
             </div>
           </cmail-form-group>
 
-          <cmail-form-group [campo]="formCadastro.get('username')">
+          <cmail-form-group [campo]="usernameUsr">
             <input formControlName="username" autofocus required type="text" name="username" cmailFormField>
             <div *ngIf="formCadastro.get('username').errors">
               <!-- errors.required -->
-              <span class="mdl-textfield__error" *ngIf="formCadastro.get('username').errors.required">
-                Informar um nome é obrigatório
+              <span class="mdl-textfield__error" *ngIf="usernameUsr.errors.required">
+                Informar um nome de usuário é obrigatório
               </span>
-              <span class="mdl-textfield__error" *ngIf="formCadastro.get('username').errors.email">
+              <!-- <span class="mdl-textfield__error" *ngIf="usernameUsr.errors.email">
                 Digite um e-mail válido
-              </span>
+              </span> -->
             </div>
-            <!-- <span class="mdl-textfield__error">Informar um nome de usuário é obrigatório!</span> -->
           </cmail-form-group>
 
-          <cmail-form-group [campo]="formCadastro.get('senha')">
+          <cmail-form-group [campo]="senhaUsr">
             <input formControlName="senha" autofocus required type="password" name="senha" cmailFormField>
-            <div *ngIf="formCadastro.get('senha').errors">
+            <div *ngIf="senhaUsr.errors">
               <!-- errors.required -->
-              <span class="mdl-textfield__error" *ngIf="formCadastro.get('senha').errors.required">
+              <span class="mdl-textfield__error" *ngIf="senhaUsr.errors.required">
                 Informar uma senha é obrigatório
               </span>
-              <span class="mdl-textfield__error" *ngIf="formCadastro.get('senha').errors.minlength">
-                Você preencheu {{ formCadastro.get('senha').errors.minlength.actualLength }} caracteres
-                de {{ formCadastro.get('senha').errors.minlength.requiredLength }}
+              <span class="mdl-textfield__error" *ngIf="senhaUsr.errors.minlength">
+                Você preencheu {{ senhaUsr.errors.minlength.actualLength }} caracteres
+                de {{ senhaUsr.errors.minlength.requiredLength }}
               </span>
             </div>
           </cmail-form-group>
 
           <!-- Novo campo telefone -->
-          <cmail-form-group [campo]="formCadastro.get('telefone')">
+          <cmail-form-group [campo]="telefoneUsr">
             <input formControlName="telefone" required type="password" name="telefone" cmailFormField>
-            <div *ngIf="formCadastro.get('telefone').errors">
+            <div *ngIf="telefoneUsr.errors">
               <!-- errors.required -->
-              <span class="mdl-textfield__error" *ngIf="formCadastro.get('telefone').errors.required">
+              <span class="mdl-textfield__error" *ngIf="telefoneUsr.errors.required">
                 Informar um telefone é obrigatório
               </span>
-              <span class="mdl-textfield__error" *ngIf="formCadastro.get('telefone').errors.pattern">
+              <span class="mdl-textfield__error" *ngIf="telefoneUsr.errors.pattern">
                 O telefone deve conter 8 ou 9 números
               </span>
             </div>
           </cmail-form-group>
 
-          <cmail-form-group [campo]="formCadastro.get('avatar')">
+          <cmail-form-group [campo]="avatarUsr">
             <input formControlName="avatar" type="text" name="avatar" cmailFormField>
+            <span class="mdl-textfield__error" *ngIf="avatarUsr.hasError('required')">
+              Informar uma url com um avatar é obrigatório!
+            </span>
+            <span class="mdl-textfield__error mdl-textfield__checking" *ngIf="avatarUsr.status === 'PENDING'">
+              Validação pendente....
+            </span>
+            <span class="mdl-textfield__error mdl-textfield__valid" *ngIf="avatarUsr.status === 'VALID'">
+              URL Válida ( ͡° ͜ʖ ͡°)
+            </span>
+            <span class="mdl-textfield__error" *ngIf="avatarUsr.hasError('urlInvalida')">
+              Erro na URL informada ¯\_(ツ)_/¯
+            </span>
           </cmail-form-group>
 
           <div class="mdl-card__actions">
@@ -74,6 +85,12 @@
               Limpar
             </button>
           </div>
+
+          <ul *ngIf="mensagensErro" class="mdl-textfield is-invalid">
+            <li *ngFor="let erro of mensagensErro" class="mdl-textfield__error"> 
+                {{erro.message}}: {{erro.value}}
+            </li>
+          </ul>
 
         </form>
       </div>
