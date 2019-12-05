@@ -18,23 +18,17 @@
                         </section>
 
                         <!-- aqui os campos do formulário -->
-                        <!-- <cmail-form-group [campo]="email">
-                            <input type="email" #email="ngModel" [(ngModel)]="login.email" name="email"
-                                 cmailFormInput required autofocus>
+                        <cmail-form-group [campo]="email">
+                            <input type="email" #email="ngModel" [(ngModel)]="login.email" name="email" cmailFormField
+                                required autofocus>
                             <span class="mdl-textfield__error">
                                 Informar um email é obrigatório!
                             </span>
-                        </cmail-form-group> -->
-                        <cmail-form-group [campo]="email">
-                            <input email required placeholder="E-mail" #email="ngModel" [(ngModel)]="login.email" name="email" type="email" cmailFormInput>
-                            <span class="mdl-textfield__error">
-                              Informe seu email @cmail.com.br
-                            </span>
-                          </cmail-form-group>
+                        </cmail-form-group>
 
                         <cmail-form-group [campo]="senha">
-                            <input type="password" #senha="ngModel" [(ngModel)]="login.password"
-                                name="senha" cmailFormField required autofocus>
+                            <input type="password" #senha="ngModel" [(ngModel)]="login.password" name="senha"
+                                cmailFormField required autofocus>
                             <span class="mdl-textfield__error">
                                 Informar uma senha é obrigatório!
                             </span>
