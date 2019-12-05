@@ -7,6 +7,7 @@ import { SharedComponentModule } from 'src/app/components/shared-components.modu
 import { LoginRoutingModule } from './login-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from 'src/app/services/login.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
     // Essencial (não está na apostila)
     FormsModule,
     HttpClientModule
+  ],
+  providers: [
+    LoginService
   ]
 })
 export class LoginModule { }

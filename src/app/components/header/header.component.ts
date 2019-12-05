@@ -18,5 +18,9 @@ export class HeaderComponent {
     toggleMenu() {
         this._isMenuOpen = !this._isMenuOpen
     }
+
+    logout() {
+        localStorage.removeItem("TOKEN")
+    }
 }
 

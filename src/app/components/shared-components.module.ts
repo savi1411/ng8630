@@ -4,13 +4,15 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { CmailFormGroupComponent } from './cmail-form-group/cmail-form-group.component';
 import { CmailFormFieldDirective } from './cmail-form-group/cmail-form-field.directive';
+import { CmailListItemComponent } from './cmail-list-item/cmail-list-item.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     // não está na apostila
     CmailFormGroupComponent,
-    CmailFormFieldDirective
+    CmailFormFieldDirective,
+    CmailListItemComponent  // CLI já declarou
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { CmailFormFieldDirective } from './cmail-form-group/cmail-form-field.dir
     HeaderComponent,
     // não está na apostila
     CmailFormGroupComponent,
-    CmailFormFieldDirective
+    CmailFormFieldDirective,
+    CmailListItemComponent  // Deve ser exportado
   ]
 })
 export class SharedComponentModule { }

@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators'
 import { VERSION } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-cadastro',
@@ -35,9 +36,10 @@ export class CadastroComponent implements OnInit {
     if (this.formCadastro.valid) {
 
       const userData = new User(this.formCadastro.value);
+      const apiUrl = `${environment.apiUrl}users/`
 
       this.httpClient
-        .post('http://localhost:3200/users', userData)
+        .post(apiUrl, userData)
         .subscribe(
           () => {
             console.log('cadastrado com sucesso')

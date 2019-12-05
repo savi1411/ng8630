@@ -1,98 +1,105 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <cmail-header></cmail-header>
+<div class="mdl-layout mdl-js-layout">
   <main class="mdl-layout__content">
     <div class="page-content">
       <div class="mdl-grid">
-        <form [formGroup]="formCadastro" (ngSubmit)="handleCadastrarUsuario()">
+        <article class="demo-card-wide mdl-card mdl-shadow--2dp">
+          <header class="mdl-card__title">
+            <h1 class="mdl-card__title-text">Bem vindos/as ao CMail!</h1>
+          </header>
 
-          <cmail-form-group [campo]="nomeUsr">
-            <input formControlName="nome" autofocus required type="text" name="nome" cmailFormField>
-            <!-- se tiver erros, então... -->
-            <div *ngIf="nomeUsr.errors">
-              <!-- errors.required -->
-              <span class="mdl-textfield__error" *ngIf="nomeUsr.errors.required">
+          <form [formGroup]="formCadastro" (ngSubmit)="handleCadastrarUsuario()" class="mdl-card__supporting-text" autocomplete="off">
+
+            <cmail-form-group [campo]="nomeUsr">
+              <input formControlName="nome" autofocus required type="text" name="nome" cmailFormField>
+              <!-- se tiver erros, então... -->
+              <div *ngIf="nomeUsr.errors">
+                <!-- errors.required -->
+                <span class="mdl-textfield__error" *ngIf="nomeUsr.errors.required">
                 Informar um nome é obrigatório
               </span>
-              <span class="mdl-textfield__error" *ngIf="nomeUsr.errors.minlength">
+                <span class="mdl-textfield__error" *ngIf="nomeUsr.errors.minlength">
                 Você preencheu {{ nomeUsr.errors.minlength.actualLength }} caracteres
                 de {{ nomeUsr.errors.minlength.requiredLength }}
               </span>
-            </div>
-          </cmail-form-group>
+              </div>
+            </cmail-form-group>
 
-          <cmail-form-group [campo]="usernameUsr">
-            <input formControlName="username" autofocus required type="text" name="username" cmailFormField>
-            <div *ngIf="formCadastro.get('username').errors">
-              <!-- errors.required -->
-              <span class="mdl-textfield__error" *ngIf="usernameUsr.errors.required">
+            <cmail-form-group [campo]="usernameUsr">
+              <input formControlName="username" autofocus required type="text" name="username" cmailFormField>
+              <div *ngIf="formCadastro.get('username').errors">
+                <!-- errors.required -->
+                <span class="mdl-textfield__error" *ngIf="usernameUsr.errors.required">
                 Informar um nome de usuário é obrigatório
               </span>
-              <!-- <span class="mdl-textfield__error" *ngIf="usernameUsr.errors.email">
-                Digite um e-mail válido
-              </span> -->
-            </div>
-          </cmail-form-group>
+                <!-- <span class="mdl-textfield__error" *ngIf="usernameUsr.errors.email">
+                  Digite um e-mail válido
+                </span> -->
+              </div>
+            </cmail-form-group>
 
-          <cmail-form-group [campo]="senhaUsr">
-            <input formControlName="senha" autofocus required type="password" name="senha" cmailFormField>
-            <div *ngIf="senhaUsr.errors">
-              <!-- errors.required -->
-              <span class="mdl-textfield__error" *ngIf="senhaUsr.errors.required">
+            <cmail-form-group [campo]="senhaUsr">
+              <input formControlName="senha" autofocus required type="password" name="senha" cmailFormField>
+              <div *ngIf="senhaUsr.errors">
+                <!-- errors.required -->
+                <span class="mdl-textfield__error" *ngIf="senhaUsr.errors.required">
                 Informar uma senha é obrigatório
               </span>
-              <span class="mdl-textfield__error" *ngIf="senhaUsr.errors.minlength">
+                <span class="mdl-textfield__error" *ngIf="senhaUsr.errors.minlength">
                 Você preencheu {{ senhaUsr.errors.minlength.actualLength }} caracteres
                 de {{ senhaUsr.errors.minlength.requiredLength }}
               </span>
-            </div>
-          </cmail-form-group>
+              </div>
+            </cmail-form-group>
 
-          <!-- Novo campo telefone -->
-          <cmail-form-group [campo]="telefoneUsr">
-            <input formControlName="telefone" required type="password" name="telefone" cmailFormField>
-            <div *ngIf="telefoneUsr.errors">
-              <!-- errors.required -->
-              <span class="mdl-textfield__error" *ngIf="telefoneUsr.errors.required">
+            <!-- Novo campo telefone -->
+            <cmail-form-group [campo]="telefoneUsr">
+              <input formControlName="telefone" required type="password" name="telefone" cmailFormField>
+              <div *ngIf="telefoneUsr.errors">
+                <!-- errors.required -->
+                <span class="mdl-textfield__error" *ngIf="telefoneUsr.errors.required">
                 Informar um telefone é obrigatório
               </span>
-              <span class="mdl-textfield__error" *ngIf="telefoneUsr.errors.pattern">
+                <span class="mdl-textfield__error" *ngIf="telefoneUsr.errors.pattern">
                 O telefone deve conter 8 ou 9 números
               </span>
-            </div>
-          </cmail-form-group>
+              </div>
+            </cmail-form-group>
 
-          <cmail-form-group [campo]="avatarUsr">
-            <input formControlName="avatar" type="text" name="avatar" cmailFormField>
-            <span class="mdl-textfield__error" *ngIf="avatarUsr.hasError('required')">
+            <cmail-form-group [campo]="avatarUsr">
+              <input formControlName="avatar" type="text" name="avatar" cmailFormField>
+              <span class="mdl-textfield__error" *ngIf="avatarUsr.hasError('required')">
               Informar uma url com um avatar é obrigatório!
             </span>
-            <span class="mdl-textfield__error mdl-textfield__checking" *ngIf="avatarUsr.status === 'PENDING'">
+              <span class="mdl-textfield__error mdl-textfield__checking" *ngIf="avatarUsr.status === 'PENDING'">
               Validação pendente....
             </span>
-            <span class="mdl-textfield__error mdl-textfield__valid" *ngIf="avatarUsr.status === 'VALID'">
+              <span class="mdl-textfield__error mdl-textfield__valid" *ngIf="avatarUsr.status === 'VALID'">
               URL Válida ( ͡° ͜ʖ ͡°)
             </span>
-            <span class="mdl-textfield__error" *ngIf="avatarUsr.hasError('urlInvalida')">
+              <span class="mdl-textfield__error" *ngIf="avatarUsr.hasError('urlInvalida')">
               Erro na URL informada ¯\_(ツ)_/¯
             </span>
-          </cmail-form-group>
+            </cmail-form-group>
 
-          <div class="mdl-card__actions">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
-              Cadastrar
-            </button>
-            <button (click)="eraseForm()" class="mdl-button mdl-js-button mdl-button--flat">
-              Limpar
-            </button>
-          </div>
+            <div class="mdl-card__actions">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                Cadastre-se
+              </button>
+              <i style="margin-left: 1rem; margin-right: 1rem">ou</i>
+              <button (click)="roteador.navigate(['/login'])" class="mdl-button mdl-js-button mdl-button--flat">
+                Entre
+              </button>
+            </div>
 
-          <ul *ngIf="mensagensErro" class="mdl-textfield is-invalid">
-            <li *ngFor="let erro of mensagensErro" class="mdl-textfield__error"> 
+            <ul *ngIf="mensagensErro" class="mdl-textfield is-invalid">
+              <li *ngFor="let erro of mensagensErro" class="mdl-textfield__error">
                 {{erro.message}}: {{erro.value}}
-            </li>
-          </ul>
+              </li>
+            </ul>
 
-        </form>
+          </form>
+
+        </article>
       </div>
     </div>
   </main>

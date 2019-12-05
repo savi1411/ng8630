@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,32 +18,19 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  // não está na apostila
-  // formCadastro = new FormGroup({
-  //   email: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  //   senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  // })
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private loginService: LoginService
+              ,private roteador: Router ) { }
 
   ngOnInit() {
   }  
 
   handleLogin(formLogin: NgForm){
     if (formLogin.valid) {
-      this.httpClient
-        .post('http://localhost:3200/login', this.login)
+      this.loginService
+        .logar(this.login)
         .subscribe(
-          (response: any) => {
-            console.log(response)
-            console.log('deu certo')
-            localStorage.setItem('cmail-token', response.token)
-          },
-          (responseError: HttpErrorResponse) => {
-            // reposta caso existam erros
-            console.log(responseError.error)
-            this.mensagensErro = responseError.error
-          }
+          () => this.roteador.navigate(['/inbox'])
+          ,(responseError: HttpErrorResponse) => this.mensagensErro = responseError.error
         )
     } else {
       // Não está na apostila
