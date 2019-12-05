@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
 import { Routes, RouterModule } from '@angular/router';
+import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
 
 const rotasCaixaDeEntrada: Routes = [
   {path: '', component: CaixaDeEntradaComponent}

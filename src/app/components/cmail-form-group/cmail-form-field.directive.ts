@@ -3,7 +3,7 @@ import { Directive, ElementRef, OnInit } from '@angular/core'
 @Directive({
     selector: '[cmailFormField]'
 })
-export class cmailFormFieldDirective implements OnInit {
+export class CmailFormFieldDirective implements OnInit {
     constructor(private campo: ElementRef) { }
 
     ngOnInit() {
