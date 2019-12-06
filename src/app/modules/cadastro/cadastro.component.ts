@@ -6,6 +6,7 @@ import { VERSION } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment'
+import { PageService } from 'src/app/services/page.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -23,13 +24,17 @@ export class CadastroComponent implements OnInit {
     username: new FormControl('', [Validators.required]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
     telefone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{4}-?[0-9]{4}[0-9]?')]),
-    avatar: new FormControl('',[Validators.required], this.validaImagem.bind(this))
+    avatar: new FormControl('', [Validators.required], this.validaImagem.bind(this))
   })
 
   constructor(private httpClient: HttpClient
-             ,private roteador: Router) { }
+    , private roteador: Router
+    , private pageService: PageService) { }
 
   ngOnInit() {
+    // Define o título da página
+    this.pageService
+      .defineTitulo('Cadastro - Cmail')
   }
 
   handleCadastrarUsuario() {
@@ -50,7 +55,7 @@ export class CadastroComponent implements OnInit {
               this.roteador.navigate(['']);
             }, 1000);
           }
-          ,(responseError: HttpErrorResponse) => {
+          , (responseError: HttpErrorResponse) => {
             // reposta caso existam erros
             this.mensagensErro = responseError.error.body
           }
@@ -61,7 +66,7 @@ export class CadastroComponent implements OnInit {
   }
 
   // Getters para uso no template
-  get nomeUsr() { return this.formCadastro.get('nome') } 
+  get nomeUsr() { return this.formCadastro.get('nome') }
   get usernameUsr() { return this.formCadastro.get('username') }
   get senhaUsr() { return this.formCadastro.get('senha') }
   get telefoneUsr() { return this.formCadastro.get('telefone') }
